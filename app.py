@@ -25,9 +25,6 @@ from high_stress_check import a_stress_score,b_stress_score,c_stress_score
 
 #answers辞書のキーは質問番号 (q_id) となり、要素（値）はユーザーが選択した選択肢のスコアになります。具体的には、ユーザーが質問に対して選んだ選択肢のテキストではなく、その選択肢に関連付けられたスコア（数値）がanswers辞書に格納されます。
 
-import streamlit as st
-import re
-
 # メールアドレスの入力
 email = st.text_input("Email Address")
 if email:
