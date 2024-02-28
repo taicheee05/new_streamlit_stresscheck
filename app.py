@@ -29,7 +29,7 @@ import streamlit as st
 import re
 
 # メールアドレスの入力
-email = st.text_input("Email Address", required=True)
+email = st.text_input("Email Address")
 if email:
     if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
         st.error("メールアドレスは半角英数で入力してください。")
@@ -47,21 +47,21 @@ if not workplace_name:
     st.error("職場名は必須項目です。")
 
 # 氏名
-name = st.text_input("氏名", required=True)
+name = st.text_input("氏名")
 if not name:
     st.error("氏名は必須項目です。")
 elif ' ' in name:
     st.error("氏名にスペースを入れないでください。")
 
 # ふりがな
-furigana = st.text_input("ふりがな", required=True)
+furigana = st.text_input("ふりがな")
 if not furigana:
     st.error("ふりがなは必須項目です。")
 elif ' ' in furigana:
     st.error("ふりがなにスペースを入れないでください。")
 
 # 社員番号
-employee_number = st.text_input("社員番号", required=True)
+employee_number = st.text_input("社員番号")
 if employee_number:
     if not re.match(r'^[A-Za-z0-9]+$', employee_number):
         st.error("社員番号は半角英数で入力してください。")
@@ -69,7 +69,7 @@ else:
     st.error("社員番号は必須項目です。")
 
 # 生年月日
-birthdate = st.date_input("生年月日を記入してください", required=True)
+birthdate = st.date_input("生年月日を記入してください")
 
 # 性別
 gender = st.radio("性別", ["男性", "女性"], index=0)
