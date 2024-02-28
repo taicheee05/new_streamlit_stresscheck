@@ -1,17 +1,15 @@
 from soten_calculate import get_score_level
 #answersはユーザーの回答を保存する辞書
 #answers辞書は、キーにNo、要素に回答の点数が入るようになった
-
 def calculate_score(answers, questions):
-    total_score = 0
-
+    total_score_a = 0
     # ユーザーの回答と質問データを照合してスコアを計算
     for question in questions:
         q_id = question['No']
         user_answer = answers[q_id]
         question_score = question['選択肢'][user_answer]
-        total_score += question_score
-    return total_score
+        total_score_a += question_score
+    return total_score_a
 
 
 #calculate辞書には回答結果が入っている

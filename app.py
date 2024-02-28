@@ -83,7 +83,10 @@ def main():
 
     results =calculate_soten_score(calculate, outputs)
     #尺度ごとに計算結果を算出
-    
+    a_stress_score=a_stress_score(calculate)
+    b_stress_score=b_stress_score(calculate)
+    c_stress_score=c_stress_score(calculate)
+
     if st.button("回答を提出する"):
         # for output in outputs:
             score = 0
