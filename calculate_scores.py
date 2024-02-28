@@ -11,8 +11,8 @@ def calculate_score(answers, questions):
         user_answer = answers[q_id]
         question_score = question['選択肢'][user_answer]
         total_score += question_score
-
     return total_score
+
 
 #calculate辞書には回答結果が入っている
 #calculate辞書のキーには問題の番号と回答者の点数が入っている

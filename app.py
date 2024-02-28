@@ -7,6 +7,7 @@ import pandas as pd
 from google.oauth2.service_account import Credentials
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from high_stress_check import a_stress_score,b_stress_score,c_stress_score
 #questions
 # [
 #     {
@@ -99,6 +100,12 @@ def main():
             df_a = pd.DataFrame(rows_a, columns=columns)  # リストからDataFrameを作成
             st.table(df_a)
             # スコアに基づいてメッセージを表示
+            if (b_stress_score >= 77) or ((a_stress_score + c_stress_score >= 76) and (b_stress_score >= 63)):
+            # 条件を満たす場合、メッセージを表示
+                st.write("あなたは高ストレス者に該当します。医師の面接指導を受けていただくことをおすすめします。")
+            else:
+                # 条件を満たさない場合、別のメッセージを表示（必要に応じて）
+                st.write("高ストレスのリスクは低いようです")
 
 if __name__ == "__main__":
     main()
