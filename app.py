@@ -83,9 +83,9 @@ def main():
 
     results =calculate_soten_score(calculate, outputs)
     #尺度ごとに計算結果を算出
-    a_stress_score=a_stress_score(calculate)
-    b_stress_score=b_stress_score(calculate)
-    c_stress_score=c_stress_score(calculate)
+    a_stress_scores=a_stress_score(calculate)
+    b_stress_scores=b_stress_score(calculate)
+    c_stress_scores=c_stress_score(calculate)
 
     if st.button("回答を提出する"):
         # for output in outputs:
@@ -103,7 +103,7 @@ def main():
             df_a = pd.DataFrame(rows_a, columns=columns)  # リストからDataFrameを作成
             st.table(df_a)
             # スコアに基づいてメッセージを表示
-            if (b_stress_score >= 77) or ((a_stress_score + c_stress_score >= 76) and (b_stress_score >= 63)):
+            if (b_stress_scores >= 77) or ((a_stress_scores + c_stress_scores >= 76) and (b_stress_scores >= 63)):
             # 条件を満たす場合、メッセージを表示
                 st.write("あなたは高ストレス者に該当します。医師の面接指導を受けていただくことをおすすめします。")
             else:
