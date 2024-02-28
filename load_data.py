@@ -21,7 +21,6 @@ def load_questions(filename):
             row['選択肢4']: row['選択肢4_スコア'],
         }
         questions.append(question)
-
     return questions
 
 # [

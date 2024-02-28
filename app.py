@@ -25,37 +25,55 @@ from high_stress_check import a_stress_score,b_stress_score,c_stress_score
 
 #answers辞書のキーは質問番号 (q_id) となり、要素（値）はユーザーが選択した選択肢のスコアになります。具体的には、ユーザーが質問に対して選んだ選択肢のテキストではなく、その選択肢に関連付けられたスコア（数値）がanswers辞書に格納されます。
 
-# Email Address (半角英数チェック)
-email = st.text_input("Email Address")
-if email and not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
-    st.error("メールアドレスは半角英数で入力してください。")
+import streamlit as st
+import re
+
+# メールアドレスの入力
+email = st.text_input("Email Address", required=True)
+if email:
+    if not re.match(r'^[\w\.-]+@[\w\.-]+\.\w+$', email):
+        st.error("メールアドレスは半角英数で入力してください。")
+else:
+    st.error("メールアドレスは必須項目です。")
 
 # 職場コード
-workplace_code = st.selectbox("職場コードを選択してください", ["コード1", "コード2", "コード3", "その他"])
+workplace_code = st.selectbox("職場コードを選択してください", ["", "コード1", "コード2", "コード3", "その他"], index=0)
+if not workplace_code:
+    st.error("職場コードは必須項目です。")
 
 # 職場名
-workplace_name = st.selectbox("職場名を選択してください", ["職場A", "職場B", "職場C", "その他"])
+workplace_name = st.selectbox("職場名を選択してください", ["", "職場A", "職場B", "職場C", "その他"], index=0)
+if not workplace_name:
+    st.error("職場名は必須項目です。")
 
-# 氏名（スペースなしチェック）p
-name = st.text_input("氏名")
-if ' ' in name:
+# 氏名
+name = st.text_input("氏名", required=True)
+if not name:
+    st.error("氏名は必須項目です。")
+elif ' ' in name:
     st.error("氏名にスペースを入れないでください。")
 
-# ふりがな（スペースなしチェック）
-furigana = st.text_input("ふりがな")
-if ' ' in furigana:
+# ふりがな
+furigana = st.text_input("ふりがな", required=True)
+if not furigana:
+    st.error("ふりがなは必須項目です。")
+elif ' ' in furigana:
     st.error("ふりがなにスペースを入れないでください。")
 
-# 社員番号 (半角英数チェック)
-employee_number = st.text_input("社員番号")
-if employee_number and not re.match(r'^[A-Za-z0-9]+$', employee_number):
-    st.error("社員番号は半角英数で入力してください。")
+# 社員番号
+employee_number = st.text_input("社員番号", required=True)
+if employee_number:
+    if not re.match(r'^[A-Za-z0-9]+$', employee_number):
+        st.error("社員番号は半角英数で入力してください。")
+else:
+    st.error("社員番号は必須項目です。")
 
 # 生年月日
-birthdate = st.date_input("生年月日を記入してください")
+birthdate = st.date_input("生年月日を記入してください", required=True)
 
 # 性別
-gender = st.radio("性別", ["男性", "女性"])
+gender = st.radio("性別", ["男性", "女性"], index=0)
+
 
 
 def main():
