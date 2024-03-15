@@ -30,56 +30,58 @@ from calculate_scores import calculate_score
 
 # メールアドレスの入力
 
-email = st.text_input("Email Address")
-if email:
-    # RFC 5322 に基づいたメールアドレスの検証パターン
-    pattern = (r'(?i)^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$')
-    if not re.match(pattern, email):
-        st.error("正しいメールアドレスの形式で入力してください。")
-else:
-    st.error("メールアドレスは必須項目です。")
-
-# 職場コード
-workplace_code = st.selectbox("職場コードを選択してください", ["コード1", "コード2", "コード3", "その他"], index=0)
-if not workplace_code:
-    st.error("職場コードは必須項目です。")
-
-# 職場名
-workplace_name = st.selectbox("職場名を選択してください", ["職場A", "職場B", "職場C", "その他"], index=0)
-if not workplace_name:
-    st.error("職場名は必須項目です。")
-
-# 氏名
-name = st.text_input("氏名")
-if not name:
-    st.error("氏名は必須項目です。")
-elif ' ' in name:
-    st.error("氏名にスペースを入れないでください。")
-
-# ふりがな
-furigana = st.text_input("ふりがな")
-if not furigana:
-    st.error("ふりがなは必須項目です。")
-elif ' ' in furigana:
-    st.error("ふりがなにスペースを入れないでください。")
-
-# 社員番号
-employee_number = st.text_input("社員番号")
-if employee_number:
-    if not re.match(r'^[A-Za-z0-9]+$', employee_number):
-        st.error("社員番号は半角英数で入力してください。")
-else:
-    st.error("社員番号は必須項目です。")
-
-# 生年月日
-birthdate = st.date_input("生年月日を記入してください")
-
-# 性別
-gender = st.radio("性別", ["男性", "女性"], index=0)
 
 
 
 def main():
+    email = st.text_input("Email Address")
+    if email:
+        # RFC 5322 に基づいたメールアドレスの検証パターン
+        pattern = (r'(?i)^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$')
+        if not re.match(pattern, email):
+            st.error("正しいメールアドレスの形式で入力してください。")
+    else:
+        st.error("メールアドレスは必須項目です。")
+
+    # 職場コード
+    workplace_code = st.selectbox("職場コードを選択してください", ["コード1", "コード2", "コード3", "その他"], index=0)
+    if not workplace_code:
+        st.error("職場コードは必須項目です。")
+
+    # 職場名
+    workplace_name = st.selectbox("職場名を選択してください", ["職場A", "職場B", "職場C", "その他"], index=0)
+    if not workplace_name:
+        st.error("職場名は必須項目です。")
+
+    # 氏名
+    name = st.text_input("氏名")
+    if not name:
+        st.error("氏名は必須項目です。")
+    elif ' ' in name:
+        st.error("氏名にスペースを入れないでください。")
+
+    # ふりがな
+    furigana = st.text_input("ふりがな")
+    if not furigana:
+        st.error("ふりがなは必須項目です。")
+    elif ' ' in furigana:
+        st.error("ふりがなにスペースを入れないでください。")
+
+    # 社員番号
+    employee_number = st.text_input("社員番号")
+    if employee_number:
+        if not re.match(r'^[A-Za-z0-9]+$', employee_number):
+            st.error("社員番号は半角英数で入力してください。")
+    else:
+        st.error("社員番号は必須項目です。")
+
+    # 生年月日
+    birthdate = st.date_input("生年月日を記入してください")
+
+    # 性別
+    gender = st.radio("性別", ["男性", "女性"], index=0)
+
+
     st.title("ストレスチェック")
 
     # 質問をロード
