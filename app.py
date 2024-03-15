@@ -27,59 +27,8 @@ from calculate_scores import calculate_score
 #questionはload_questions関数の中で登場する変数みたいなもので、questionsリストの中に入っている1つ1つのインデックス内にある辞書がquestion
 
 #answers辞書のキーは質問番号 (q_id) となり、要素（値）はユーザーが選択した選択肢のスコアになります。具体的には、ユーザーが質問に対して選んだ選択肢のテキストではなく、その選択肢に関連付けられたスコア（数値）がanswers辞書に格納されます。
-
 #初期化
 form_valid = True
-
-# メールアドレスの入力
-email = st.text_input("Email Address")
-if email:
-    # RFC 5322 に基づいたメールアドレスの検証パターン
-    pattern = (r'(?i)^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$')
-    if not re.match(pattern, email):
-        form_valid = False
-        st.error("正しいメールアドレスの形式で入力してください。")
-else:
-    st.error("メールアドレスは必須項目です。")
-    form_valid = False
-
-# 職場コード
-workplace_code = st.selectbox("職場コードを選択してください", ["コード1", "コード2", "コード3", "その他"], index=0)
-if not workplace_code:
-    st.error("職場コードは必須項目です。")
-
-# 職場名
-workplace_name = st.selectbox("職場名を選択してください", ["職場A", "職場B", "職場C", "その他"], index=0)
-if not workplace_name:
-    st.error("職場名は必須項目です。")
-
-# 氏名
-name = st.text_input("氏名")
-if not name:
-    st.error("氏名は必須項目です。")
-elif ' ' in name:
-    st.error("氏名にスペースを入れないでください。")
-
-# ふりがな
-furigana = st.text_input("ふりがな")
-if not furigana:
-    st.error("ふりがなは必須項目です。")
-elif ' ' in furigana:
-    st.error("ふりがなにスペースを入れないでください。")
-
-# 社員番号
-employee_number = st.text_input("社員番号")
-if employee_number:
-    if not re.match(r'^[A-Za-z0-9]+$', employee_number):
-        st.error("社員番号は半角英数で入力してください。")
-else:
-    st.error("社員番号は必須項目です。")
-
-# 生年月日
-birthdate = st.date_input("生年月日を記入してください")
-
-# 性別
-gender = st.radio("性別", ["男性", "女性"], index=0)
 
 
 
@@ -113,6 +62,58 @@ def main():
     c_stress_scores=c_stress_score(calculate)
 
     if st.button("回答を提出する"):
+    
+
+            # メールアドレスの入力
+            email = st.text_input("Email Address")
+            if email:
+                # RFC 5322 に基づいたメールアドレスの検証パターン
+                pattern = (r'(?i)^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$')
+                if not re.match(pattern, email):
+                    form_valid = False
+                    st.error("正しいメールアドレスの形式で入力してください。")
+            else:
+                st.error("メールアドレスは必須項目です。")
+                form_valid = False
+
+            # 職場コード
+            workplace_code = st.selectbox("職場コードを選択してください", ["コード1", "コード2", "コード3", "その他"], index=0)
+            if not workplace_code:
+                st.error("職場コードは必須項目です。")
+
+            # 職場名
+            workplace_name = st.selectbox("職場名を選択してください", ["職場A", "職場B", "職場C", "その他"], index=0)
+            if not workplace_name:
+                st.error("職場名は必須項目です。")
+
+            # 氏名
+            name = st.text_input("氏名")
+            if not name:
+                st.error("氏名は必須項目です。")
+            elif ' ' in name:
+                st.error("氏名にスペースを入れないでください。")
+
+            # ふりがな
+            furigana = st.text_input("ふりがな")
+            if not furigana:
+                st.error("ふりがなは必須項目です。")
+            elif ' ' in furigana:
+                st.error("ふりがなにスペースを入れないでください。")
+
+            # 社員番号
+            employee_number = st.text_input("社員番号")
+            if employee_number:
+                if not re.match(r'^[A-Za-z0-9]+$', employee_number):
+                    st.error("社員番号は半角英数で入力してください。")
+            else:
+                st.error("社員番号は必須項目です。")
+
+            # 生年月日
+            birthdate = st.date_input("生年月日を記入してください")
+
+            # 性別
+            gender = st.radio("性別", ["男性", "女性"], index=0)
+
         # for output in outputs
             st.write('以下があたなのストレスプロフィールです。スクリーンショット等でご自分で記録を大切に保管してください')
             score = 0
