@@ -157,7 +157,7 @@ def main():
             # スプレッドシートにデータを追加する関数を呼び出し
             test_list=stress_check_spreadsheetreflect(calculate)
             spreadsheet_reflect(user_data,calculate,results,test_list)      
-        else:
+        elif form_valid == False:
             st.error("エラーを修正してください")
 
 if __name__ == "__main__":
