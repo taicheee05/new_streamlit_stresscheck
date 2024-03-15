@@ -5,9 +5,6 @@ import re
 import numpy as np
 import pandas as pd
 import toml
-from google.oauth2.service_account import Credentials
-import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from high_stress_check import a_stress_score,b_stress_score,c_stress_score,stress_check_spreadsheetreflect
 from spreadsheet_reflect import spreadsheet_reflect #add 2024/03/08
 from calculate_scores import calculate_score
