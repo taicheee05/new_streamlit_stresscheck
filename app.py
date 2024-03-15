@@ -4,10 +4,13 @@ from calculate_scores import calculate_score,calculate_soten_score
 import re
 import numpy as np
 import pandas as pd
+import toml
 from google.oauth2.service_account import Credentials
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from high_stress_check import a_stress_score,b_stress_score,c_stress_score
+from high_stress_check import a_stress_score,b_stress_score,c_stress_score,stress_check_spreadsheetreflect
+from spreadsheet_reflect import spreadsheet_reflect #add 2024/03/08
+from calculate_scores import calculate_score
 #questions
 # [
 #     {
@@ -103,9 +106,9 @@ def main():
     c_stress_scores=c_stress_score(calculate)
 
     if st.button("回答を提出する"):
-        # for output in outputs:
+        # for output in outputs
+            st.write('以下があたなのストレスプロフィールです。スクリーンショット等でご自分で記録を大切に保管してください')
             score = 0
-
             columns = ['Category', '低い／少ない', 'やや低い／少ない', '普通', 'やや高い／多い', '高い／多い']
         
             rows_a = []  # 空のリストを初期化
@@ -122,7 +125,30 @@ def main():
             # 条件を満たす場合、メッセージを表示
                 st.write("あなたは高ストレス者に該当します。医師の面接指導を受けていただくことをおすすめします。")
             else:
-                # 条件を満たさない場合、別のメッセージを表示（必要に応じて）
-                st.write("高ストレスのリスクは低いようです")
+            # 条件を満たさない場合、別のメッセージを表示（必要に応じて）
+                st.write("高ストレスのリスクは低いようです。一方で体調が優れない、気分の変調があるなどの異変がある場合には周囲に相談し、医師の面談を受けてください")
+
+            list1=[[a_stress_scores],[b_stress_scores],[c_stress_scores]]
+            index1 = ["ストレスの要因に関する項目", "心身のストレス反応に関する項目", "周囲のサポートに関する項目"]
+            columns1 =["評価点（合計）"]
+            df=pd.DataFrame(data=list1, index=index1, columns=columns1)
+            st.table(df)
+
+            # ユーザーの個人情報と回答を結合
+            user_data = [
+                email,
+                workplace_code,
+                workplace_name,
+                name,
+                furigana,
+                employee_number,
+                str(birthdate),  # datetimeオブジェクトを文字列に変換
+                gender
+            ] 
+            
+            # スプレッドシートにデータを追加する関数を呼び出し
+            test_list=stress_check_spreadsheetreflect(calculate)
+            spreadsheet_reflect(user_data,calculate,results,test_list)      
+
 if __name__ == "__main__":
     main()

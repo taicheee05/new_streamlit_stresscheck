@@ -1,32 +1,35 @@
+##修正version
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
+import streamlit as st
+import toml
+from calculate_scores import calculate_soten_score
+from high_stress_check import stress_check_spreadsheetreflect
 
-# スプレッドシートへの接続設定
-def spreadsheet_reflect(calculate):
-    scope = ['https://spreadsheets.google.com/feeds','https://www.googleapis.com/auth/drive']
-    creds = ServiceAccountCredentials.from_json_keyfile_name('path/to/your/service-account.json', scope) #jsonが配置されている場所を記入する
-    client = gspread.authorize(creds)
-    # スプレッドシートを開く
-    spreadsheet = client.open('your_spreadsheet_name')  # スプレッドシート名を指定
-    worksheet = spreadsheet.sheet1  # 最初のワークシートを選択
-    #回答を列に追加していく。
-    cells=[]
-    for answer in calculate:
-        cell=answer[]
+# StreamlitのSecretsから認証情報を取得してGoogle APIにログイン
+service_account_info = st.secrets["gcp_service_account"]
+scope = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapis.com/auth/drive']
+credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
+gc = gspread.authorize(credentials)
 
 
-# 回答を提出するボタンが押されたとき
-    if st.button("回答を提出する"):
-        # ユーザーの回答データをリストにまとめる
-        user_data = [
-            email,
-            workplace_code,
-            workplace_name,
-            name,
-            furigana,
-            employee_number,
-            str(birthdate),  # datetimeオブジェクトを文字列に変換
-            gender
-        ]    
+def spreadsheet_reflect(user_data, calculate,results,test_list):
+
+    # スプレッドシートIDを変数に格納する
+    SPREADSHEET_KEY = st.secrets["spreadsheet"]["id"]
+    
+    # スプレッドシート（ブック）を開く
+    workbook = gc.open_by_key(SPREADSHEET_KEY)
+    # 最初のワークシートを開く
+    worksheet = workbook.sheet1
+    
+    # calculateから値のリストを作成し、user_dataにcalculate_valuesを追加
+    calculate_values = list(calculate.values())
+    results_values=list(results.values())
+    high_stress_values = list(test_list.values())
+    row_data = user_data + calculate_values + results_values + high_stress_values
+
     # スプレッドシートにデータを追加
-    worksheet.append_row(user_data)  # ユーザーの回答を追加
+    worksheet.append_row(row_data)
+
+# この関数を実際に使用する際には、"JSONファイルのパス"と"シートID"を適切な値に置き換えてください。
