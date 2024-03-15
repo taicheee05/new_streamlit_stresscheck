@@ -28,16 +28,20 @@ from calculate_scores import calculate_score
 
 #answers辞書のキーは質問番号 (q_id) となり、要素（値）はユーザーが選択した選択肢のスコアになります。具体的には、ユーザーが質問に対して選んだ選択肢のテキストではなく、その選択肢に関連付けられたスコア（数値）がanswers辞書に格納されます。
 
-# メールアドレスの入力
+#初期化
+form_valid = True
 
+# メールアドレスの入力
 email = st.text_input("Email Address")
 if email:
     # RFC 5322 に基づいたメールアドレスの検証パターン
     pattern = (r'(?i)^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$')
     if not re.match(pattern, email):
+        form_valid = False
         st.error("正しいメールアドレスの形式で入力してください。")
 else:
     st.error("メールアドレスは必須項目です。")
+    form_valid = False
 
 # 職場コード
 workplace_code = st.selectbox("職場コードを選択してください", ["コード1", "コード2", "コード3", "その他"], index=0)
