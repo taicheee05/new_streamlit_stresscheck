@@ -113,6 +113,7 @@ def main():
     c_stress_scores=c_stress_score(calculate)
 
     if st.button("回答を提出する"):
+        if form_valid == True:
         # for output in outputs
             st.write('以下があたなのストレスプロフィールです。スクリーンショット等でご自分で記録を大切に保管してください')
             score = 0
@@ -156,6 +157,8 @@ def main():
             # スプレッドシートにデータを追加する関数を呼び出し
             test_list=stress_check_spreadsheetreflect(calculate)
             spreadsheet_reflect(user_data,calculate,results,test_list)      
+        else:
+            st.error("エラーを修正してください")
 
 if __name__ == "__main__":
     main()
