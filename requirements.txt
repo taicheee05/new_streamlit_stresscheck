@@ -1,3 +1,7 @@
-pandas
 streamlit
 numpy
+pandas
+toml
+google-auth
+gspread
+oauth2client
