@@ -154,7 +154,7 @@ def main():
             test_list=stress_check_spreadsheetreflect(calculate)
             spreadsheet_reflect(user_data,calculate,results,test_list)      
 
-if form_valid==True:
+if form_valid:
     if __name__ == "__main__":
         main()
 else:
