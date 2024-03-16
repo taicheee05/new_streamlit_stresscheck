@@ -135,7 +135,7 @@ def main():
                 for category, rating in results.items():
                     new_row = {column: '' for column in columns}  # 新しい行を辞書として作成
                     new_row['Category'] = category
-                    new_row[rating] = '〇'
+                    new_row[rating] = "〇"
                     rows_a.append(new_row)  # リストに辞書を追加
                 df_a = pd.DataFrame(rows_a, columns=columns)  # リストからDataFrameを作成
                 st.table(df_a)
