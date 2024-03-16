@@ -1,6 +1,6 @@
 import streamlit as st
 from load_data import load_questions,load_output
-from calculate_scores import calculate_score,calculate_soten_score
+from calculate_scores import calculate_score,calculate_soten_score,syakudo_values_test
 import re
 import numpy as np
 import pandas as pd
@@ -118,7 +118,8 @@ def main():
             # calculate[q_id]=st.radio(q_text,list(choices.values()))
             calculate[q_id]=choices[answers[q_id]]
 
-        results, syakudo_values =calculate_soten_score(calculate, outputs)
+        results =calculate_soten_score(calculate, outputs)
+        syakudo_values=syakudo_values_test(calculate, outputs)
         #尺度ごとに計算結果を算出
         a_stress_scores=a_stress_score(calculate)
         b_stress_scores=b_stress_score(calculate)

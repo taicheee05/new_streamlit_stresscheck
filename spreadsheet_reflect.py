@@ -3,7 +3,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import streamlit as st
 import toml
-from calculate_scores import calculate_soten_score
+from calculate_scores import calculate_soten_score, syakudo_values_test
 from high_stress_check import stress_check_spreadsheetreflect
 
 # StreamlitのSecretsから認証情報を取得してGoogle APIにログイン
