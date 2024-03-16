@@ -26,66 +26,67 @@ def calculate_soten_score(calculate, outputs):
         o_id = output['番号']
         if o_id==1:
             score = 15 - (calculate[1] + calculate[2] + calculate[3])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])            
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]            
         elif o_id==2:
             score = 15 - (calculate[4] + calculate[5] + calculate[6])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==3:
             score = 5 - calculate[7]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==4:
             score = 10 -(calculate[12] + calculate[13]) +calculate[14]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==5:
             score = 5- calculate[15]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==6:
             score = 15 - (calculate[8] + calculate[9] + calculate[10])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==7:
             score = calculate[11]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])                
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]                
         elif o_id==8:
             score = 5 - calculate[16]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==9:
             score =5 - calculate[17]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==10:
             score =calculate[18]+calculate[19]+calculate[20]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==11:
             score=calculate[21]+calculate[22]+calculate[23]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==12:
             score=calculate[24]+calculate[25]+calculate[26]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==13:
             score=calculate[27]+calculate[28]+calculate[29]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==14:
             score=calculate[30]+calculate[31]+calculate[32]+calculate[33]+calculate[34]+calculate[35]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==15:
             score=calculate[36]+calculate[37]+calculate[38]+calculate[39]+calculate[40]+calculate[41]+calculate[42]+calculate[43]+calculate[44]+calculate[45]+calculate[46]
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==16:
             score=15-(calculate[47]+calculate[50]+calculate[53])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==17:
             score=15-(calculate[48]+calculate[51]+calculate[54])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==18:
             score=15-(calculate[49]+calculate[52]+calculate[55])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
         elif o_id==19:
             score=10-(calculate[56]+calculate[57])
-            results[output['尺度']] = get_score_level(score, output['選択肢'])
+            results[output['尺度']] = [score,get_score_level(score, output['選択肢'])]
 
     return results
 
 
-            
+#results辞書の中身
+    #キーに尺度の名前が入り、値にはlevel = ["低い／少ない", "やや低い／少ない", "普通", "やや高い／多い", "高い／多い"]の何れかが入る
 
 #其々の列の指定方法
     # output["選択肢"][0]: '低い／少ない'

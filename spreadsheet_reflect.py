@@ -27,6 +27,14 @@ def spreadsheet_reflect(user_data, calculate,results,test_list):
     calculate_values = list(calculate.values())
     results_values=list(results.values())
     high_stress_values = list(test_list.values())
+    values_list = list(results.values())
+    scores = []  # すべてのスコアを格納するための新しいリスト
+    for score_and_level in values_list:
+        score = score_and_level[0]  # 各リストの最初の要素（スコア）を取り出す
+        scores.append(score)  # スコアをscoresリストに追加
+
+# これでscoresには、すべての値が列挙された形になります。
+
     row_data = user_data + calculate_values + results_values + high_stress_values
 
     # スプレッドシートにデータを追加
