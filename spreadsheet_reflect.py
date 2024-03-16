@@ -27,7 +27,6 @@ def spreadsheet_reflect(user_data, calculate,results,test_list):
     calculate_values = list(calculate.values())
     results_values=list(results.values())
     high_stress_values = list(test_list.values())
-    values_list = list(results.values())
 
 # これでscoresには、すべての値が列挙された形になります。
 
