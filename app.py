@@ -118,7 +118,7 @@ def main():
             # calculate[q_id]=st.radio(q_text,list(choices.values()))
             calculate[q_id]=choices[answers[q_id]]
 
-        results =calculate_soten_score(calculate, outputs)
+        results, syakudo_values =calculate_soten_score(calculate, outputs)
         #尺度ごとに計算結果を算出
         a_stress_scores=a_stress_score(calculate)
         b_stress_scores=b_stress_score(calculate)
@@ -173,7 +173,8 @@ def main():
                 
                 # スプレッドシートにデータを追加する関数を呼び出し
                 test_list=stress_check_spreadsheetreflect(calculate)
-                spreadsheet_reflect(user_data,calculate,results,test_list)      
+
+                spreadsheet_reflect(user_data,calculate,results,test_list,syakudo_values)      
     else:
         st.error("エラーを修正してください")
 if __name__ == "__main__":

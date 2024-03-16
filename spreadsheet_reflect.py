@@ -13,7 +13,7 @@ credentials = Credentials.from_service_account_info(service_account_info, scopes
 gc = gspread.authorize(credentials)
 
 
-def spreadsheet_reflect(user_data, calculate,results,test_list):
+def spreadsheet_reflect(user_data, calculate,results,test_list,syakudo_value):
 
     # スプレッドシートIDを変数に格納する
     SPREADSHEET_KEY = st.secrets["spreadsheet"]["id"]
@@ -27,10 +27,11 @@ def spreadsheet_reflect(user_data, calculate,results,test_list):
     calculate_values = list(calculate.values())
     results_values=list(results.values())
     high_stress_values = list(test_list.values())
+    syakudo_values=list(syakudo_value.values())
 
 # これでscoresには、すべての値が列挙された形になります。
 
-    row_data = user_data + calculate_values + results_values + high_stress_values
+    row_data = user_data + calculate_values + results_values + high_stress_values + syakudo_values
 
     # スプレッドシートにデータを追加
     worksheet.append_row(row_data)
