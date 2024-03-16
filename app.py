@@ -127,7 +127,7 @@ def main():
         if st.button("回答を提出する"):
             # for output in outputs
                 st.write('以下があたなのストレスプロフィールです。スクリーンショット等でご自分で記録を大切に保管してください')
-                score = 0
+                
                 columns = ['Category', '低い／少ない', 'やや低い／少ない', '普通', 'やや高い／多い', '高い／多い']
             
                 rows_a = []  # 空のリストを初期化
