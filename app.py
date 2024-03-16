@@ -147,7 +147,7 @@ def main():
                 # 条件を満たさない場合、別のメッセージを表示（必要に応じて）
                     st.write("高ストレスのリスクは低いようです。一方で体調が優れない、気分の変調があるなどの異変がある場合には周囲に相談し、医師の面談を受けてください")
 
-                list1=[[[a_stress_scores],[b_stress_scores],[c_stress_scores]],[["高得点ほど高ストレス"],["高得点ほど高ストレス"],["高得点ほど高ストレス"]]
+                list1=[[[a_stress_scores],[b_stress_scores],[c_stress_scores]],[["高得点ほど高ストレス"],["高得点ほど高ストレス"],["高得点ほど高ストレス"]]]
                 index1 = ["ストレスの要因に関する項目", "心身のストレス反応に関する項目", "周囲のサポートに関する項目"]
                 columns1 =[["評価点（合計）"],["解説"]]
                 df=pd.DataFrame(data=list1, index=index1, columns=columns1)
