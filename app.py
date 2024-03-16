@@ -11,6 +11,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from high_stress_check import a_stress_score,b_stress_score,c_stress_score,stress_check_spreadsheetreflect
 from spreadsheet_reflect import spreadsheet_reflect #add 2024/03/08
 from calculate_scores import calculate_score
+from datetime import date
 #questions
 # [
 #     {
@@ -29,6 +30,7 @@ from calculate_scores import calculate_score
 #answers辞書のキーは質問番号 (q_id) となり、要素（値）はユーザーが選択した選択肢のスコアになります。具体的には、ユーザーが質問に対して選んだ選択肢のテキストではなく、その選択肢に関連付けられたスコア（数値）がanswers辞書に格納されます。
 #初期化
 form_valid = True
+st.write("正しい記載があった後にストレスチェックの質問が表示されます")
 # メールアドレスの入力
 email = st.text_input("Email Address")
 if email:
@@ -82,7 +84,11 @@ else:
     form_valid=False
 
 # 生年月日
-birthdate = st.date_input("生年月日を記入してください")
+birthdate = st.date_input(
+    "生年月日を記入してください",
+    min_value=date(1930, 1, 1),
+    max_value=date.today()
+)
 
 # 性別
 gender = st.radio("性別", ["男性", "女性"], index=0)
