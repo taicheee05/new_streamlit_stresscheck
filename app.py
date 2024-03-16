@@ -90,80 +90,80 @@ gender = st.radio("性別", ["男性", "女性"], index=0)
 
 def main():
     st.title("ストレスチェック")
+    if form_valid:
 
-    # 質問をロード
-    questions = load_questions("survey_questions.csv")
-    # 素点計算ロジックをロード
-    if gender== "男性":
-        outputs=load_output("output_man.csv")
-    else:
-        outputs=load_output("output_woman.csv")
-    
-    # ユーザーの回答を保持する辞書
-    answers = {}
-    # 計算用にユーザー回答を保存する辞書
-    calculate={}
-
-    # 質問ごとにUIを作成
-    for question in questions:
-        q_id, q_text, choices = question['No'], question['質問文'], question['選択肢']
-        answers[q_id] = st.radio(q_text, list(choices.keys()))
-        # calculate[q_id]=st.radio(q_text,list(choices.values()))
-        calculate[q_id]=choices[answers[q_id]]
-
-    results =calculate_soten_score(calculate, outputs)
-    #尺度ごとに計算結果を算出
-    a_stress_scores=a_stress_score(calculate)
-    b_stress_scores=b_stress_score(calculate)
-    c_stress_scores=c_stress_score(calculate)
-
-    if st.button("回答を提出する"):
-        # for output in outputs
-            st.write('以下があたなのストレスプロフィールです。スクリーンショット等でご自分で記録を大切に保管してください')
-            score = 0
-            columns = ['Category', '低い／少ない', 'やや低い／少ない', '普通', 'やや高い／多い', '高い／多い']
+        # 質問をロード
+        questions = load_questions("survey_questions.csv")
+        # 素点計算ロジックをロード
+        if gender== "男性":
+            outputs=load_output("output_man.csv")
+        else:
+            outputs=load_output("output_woman.csv")
         
-            rows_a = []  # 空のリストを初期化
+        # ユーザーの回答を保持する辞書
+        answers = {}
+        # 計算用にユーザー回答を保存する辞書
+        calculate={}
 
-            for category, rating in results.items():
-                new_row = {column: '' for column in columns}  # 新しい行を辞書として作成
-                new_row['Category'] = category
-                new_row[rating] = '〇'
-                rows_a.append(new_row)  # リストに辞書を追加
-            df_a = pd.DataFrame(rows_a, columns=columns)  # リストからDataFrameを作成
-            st.table(df_a)
-            # スコアに基づいてメッセージを表示
-            if (b_stress_scores >= 77) or ((a_stress_scores + c_stress_scores >= 76) and (b_stress_scores >= 63)):
-            # 条件を満たす場合、メッセージを表示
-                st.write("あなたは高ストレス者に該当します。医師の面接指導を受けていただくことをおすすめします。")
-            else:
-            # 条件を満たさない場合、別のメッセージを表示（必要に応じて）
-                st.write("高ストレスのリスクは低いようです。一方で体調が優れない、気分の変調があるなどの異変がある場合には周囲に相談し、医師の面談を受けてください")
+        # 質問ごとにUIを作成
+        for question in questions:
+            q_id, q_text, choices = question['No'], question['質問文'], question['選択肢']
+            answers[q_id] = st.radio(q_text, list(choices.keys()))
+            # calculate[q_id]=st.radio(q_text,list(choices.values()))
+            calculate[q_id]=choices[answers[q_id]]
 
-            list1=[[a_stress_scores],[b_stress_scores],[c_stress_scores]]
-            index1 = ["ストレスの要因に関する項目", "心身のストレス反応に関する項目", "周囲のサポートに関する項目"]
-            columns1 =["評価点（合計）"]
-            df=pd.DataFrame(data=list1, index=index1, columns=columns1)
-            st.table(df)
+        results =calculate_soten_score(calculate, outputs)
+        #尺度ごとに計算結果を算出
+        a_stress_scores=a_stress_score(calculate)
+        b_stress_scores=b_stress_score(calculate)
+        c_stress_scores=c_stress_score(calculate)
 
-            # ユーザーの個人情報と回答を結合
-            user_data = [
-                email,
-                workplace_code,
-                workplace_name,
-                name,
-                furigana,
-                employee_number,
-                str(birthdate),  # datetimeオブジェクトを文字列に変換
-                gender
-            ] 
+        if st.button("回答を提出する"):
+            # for output in outputs
+                st.write('以下があたなのストレスプロフィールです。スクリーンショット等でご自分で記録を大切に保管してください')
+                score = 0
+                columns = ['Category', '低い／少ない', 'やや低い／少ない', '普通', 'やや高い／多い', '高い／多い']
             
-            # スプレッドシートにデータを追加する関数を呼び出し
-            test_list=stress_check_spreadsheetreflect(calculate)
-            spreadsheet_reflect(user_data,calculate,results,test_list)      
+                rows_a = []  # 空のリストを初期化
 
-if form_valid:
-    if __name__ == "__main__":
+                for category, rating in results.items():
+                    new_row = {column: '' for column in columns}  # 新しい行を辞書として作成
+                    new_row['Category'] = category
+                    new_row[rating] = '〇'
+                    rows_a.append(new_row)  # リストに辞書を追加
+                df_a = pd.DataFrame(rows_a, columns=columns)  # リストからDataFrameを作成
+                st.table(df_a)
+                # スコアに基づいてメッセージを表示
+                if (b_stress_scores >= 77) or ((a_stress_scores + c_stress_scores >= 76) and (b_stress_scores >= 63)):
+                # 条件を満たす場合、メッセージを表示
+                    st.write("あなたは高ストレス者に該当します。医師の面接指導を受けていただくことをおすすめします。")
+                else:
+                # 条件を満たさない場合、別のメッセージを表示（必要に応じて）
+                    st.write("高ストレスのリスクは低いようです。一方で体調が優れない、気分の変調があるなどの異変がある場合には周囲に相談し、医師の面談を受けてください")
+
+                list1=[[a_stress_scores],[b_stress_scores],[c_stress_scores]]
+                index1 = ["ストレスの要因に関する項目", "心身のストレス反応に関する項目", "周囲のサポートに関する項目"]
+                columns1 =["評価点（合計）"]
+                df=pd.DataFrame(data=list1, index=index1, columns=columns1)
+                st.table(df)
+
+                # ユーザーの個人情報と回答を結合
+                user_data = [
+                    email,
+                    workplace_code,
+                    workplace_name,
+                    name,
+                    furigana,
+                    employee_number,
+                    str(birthdate),  # datetimeオブジェクトを文字列に変換
+                    gender
+                ] 
+                
+                # スプレッドシートにデータを追加する関数を呼び出し
+                test_list=stress_check_spreadsheetreflect(calculate)
+                spreadsheet_reflect(user_data,calculate,results,test_list)      
+    else:
+        st.error("エラーを修正してください")
+if __name__ == "__main__":
         main()
-else:
-    st.error("エラーを修正してください")
+
